@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Bible Graph Relationship Types",
+  "description": "Canonical relationship type definitions with inverses",
+  "categories": {
+    "familial": {
+      "description": "Family relationships (gender-specific)",
+      "types": {
+        "father_of": { "inverse": "son_of", "from": "person", "to": "person", "description": "Father to son" },
+        "mother_of": { "inverse": "son_of", "from": "person", "to": "person", "description": "Mother to son" },
+        "father_of__daughter": { "key": "father_of", "inverse": "daughter_of", "from": "person", "to": "person", "description": "Father to daughter" },
+        "mother_of__daughter": { "key": "mother_of", "inverse": "daughter_of", "from": "person", "to": "person", "description": "Mother to daughter" },
+        "son_of": { "inverse": "father_of", "from": "person", "to": "person", "description": "Son to parent" },
+        "daughter_of": { "inverse": "father_of", "from": "person", "to": "person", "description": "Daughter to parent" },
+        "husband_of": { "inverse": "wife_of", "from": "person", "to": "person", "description": "Husband to wife" },
+        "wife_of": { "inverse": "husband_of", "from": "person", "to": "person", "description": "Wife to husband" },
+        "brother_of": { "inverse": "brother_of", "from": "person", "to": "person", "description": "Brother to brother" },
+        "sister_of": { "inverse": "sister_of", "from": "person", "to": "person", "description": "Sister to sister" },
+        "brother_of__sister": { "key": "brother_of", "inverse": "sister_of", "from": "person", "to": "person", "description": "Brother to sister" }
+      }
+    },
+    "geographic": {
+      "description": "Location-based relationships",
+      "types": {
+        "born_in": { "inverse": "is_birthplace_of", "from": "person", "to": "place", "description": "Person born at place" },
+        "is_birthplace_of": { "inverse": "born_in", "from": "place", "to": "person", "description": "Place where person was born" },
+        "died_in": { "inverse": "is_death_place_of", "from": "person", "to": "place", "description": "Person died at place" },
+        "is_death_place_of": { "inverse": "died_in", "from": "place", "to": "person", "description": "Place where person died" },
+        "traveled_to": { "inverse": "was_visited_by", "from": "person", "to": "place", "description": "Person traveled to place" },
+        "was_visited_by": { "inverse": "traveled_to", "from": "place", "to": "person", "description": "Place was visited by person" },
+        "located_in": { "inverse": "contains", "from": "place", "to": "place", "description": "Place located within another place" },
+        "contains": { "inverse": "located_in", "from": "place", "to": "place", "description": "Place contains another place" }
+      }
+    },
+    "social": {
+      "description": "Social and organizational relationships",
+      "types": {
+        "is_member_of": { "inverse": "has_member", "from": "person", "to": "group", "description": "Person is member of group" },
+        "has_member": { "inverse": "is_member_of", "from": "group", "to": "person", "description": "Group has person as member" },
+        "is_leader_of": { "inverse": "is_led_by", "from": "person", "to": "group", "description": "Person leads group" },
+        "is_led_by": { "inverse": "is_leader_of", "from": "group", "to": "person", "description": "Group is led by person" },
+        "belongs_to_clan": { "inverse": "has_clan_member", "from": "person", "to": "clan", "description": "Person belongs to clan" },
+        "has_clan_member": { "inverse": "belongs_to_clan", "from": "clan", "to": "person", "description": "Clan has person as member" }
+      }
+    },
+    "event": {
+      "description": "Event-related relationships",
+      "types": {
+        "participated_in": { "inverse": "includes_participant", "from": "person", "to": "event", "description": "Person participated in event" },
+        "includes_participant": { "inverse": "participated_in", "from": "event", "to": "person", "description": "Event includes person as participant" },
+        "occurred_at": { "inverse": "is_location_of", "from": "event", "to": "place", "description": "Event occurred at place" },
+        "is_location_of": { "inverse": "occurred_at", "from": "place", "to": "event", "description": "Place is location of event" }
+      }
+    }
+  }
+}

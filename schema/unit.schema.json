@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://biblegraph.ai/schema/unit.schema.json",
+  "title": "Bible Graph Unit",
+  "description": "Schema for Bible Graph unit frontmatter (people, places, clans, groups, events)",
+  "type": "object",
+  "required": ["id", "name", "type"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Globally unique UUID v4 identifier"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Display name"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["person", "place", "clan", "group", "event"],
+      "description": "Unit category"
+    },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Alternative names"
+    },
+    "gender": {
+      "type": "string",
+      "enum": ["male", "female", "unknown"],
+      "description": "Gender (person type only)"
+    },
+    "era": {
+      "type": "string",
+      "enum": [
+        "Creation",
+        "Patriarchs",
+        "Exodus",
+        "Judges",
+        "United Kingdom",
+        "Divided Kingdom",
+        "Exile",
+        "Return",
+        "Intertestamental",
+        "New Testament"
+      ],
+      "description": "Biblical era"
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["book", "start_chapter", "start_verse"],
+        "properties": {
+          "book": { "type": "string" },
+          "start_chapter": { "type": "integer", "minimum": 1 },
+          "start_verse": { "type": "integer", "minimum": 1 },
+          "end_chapter": { "type": "integer", "minimum": 1 },
+          "end_verse": { "type": "integer", "minimum": 1 }
+        }
+      },
+      "description": "Scripture references"
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["target_id", "target_name", "type"],
+        "properties": {
+          "target_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "UUID of related unit"
+          },
+          "target_name": {
+            "type": "string",
+            "description": "Display name of related unit (human readability only)"
+          },
+          "type": {
+            "type": "string",
+            "description": "Relationship type from relationships.json"
+          }
+        }
+      },
+      "description": "Relationships to other units"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Categorization tags"
+    }
+  },
+  "if": {
+    "properties": { "type": { "const": "person" } }
+  },
+  "then": {
+    "required": ["gender"]
+  }
+}
