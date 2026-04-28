@@ -1,0 +1,48 @@
+{
+  "relationships": [
+    { "name": "father_of",  "inverses": ["son_of", "daughter_of"], "category": "familial" },
+    { "name": "mother_of",  "inverses": ["son_of", "daughter_of"], "category": "familial" },
+    { "name": "son_of",     "inverses": ["father_of", "mother_of"], "category": "familial" },
+    { "name": "daughter_of","inverses": ["father_of", "mother_of"], "category": "familial" },
+    { "name": "husband_of", "inverses": ["wife_of"],     "category": "marital" },
+    { "name": "wife_of",    "inverses": ["husband_of"],  "category": "marital" },
+    { "name": "brother_of", "inverses": ["brother_of", "sister_of"], "category": "sibling" },
+    { "name": "sister_of",  "inverses": ["brother_of", "sister_of"], "category": "sibling" },
+    { "name": "member_of",       "inverses": ["has_member"],      "category": "membership" },
+    { "name": "has_member",      "inverses": ["member_of"],       "category": "membership" },
+    { "name": "participant_in",  "inverses": ["has_participant"], "category": "event" },
+    { "name": "has_participant", "inverses": ["participant_in"],  "category": "event" },
+    { "name": "dwelt_in",        "inverses": ["was_home_to"],     "category": "location" },
+    { "name": "was_home_to",     "inverses": ["dwelt_in"],        "category": "location" }
+  ],
+  "books": [
+    "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy",
+    "Joshua", "Judges", "Ruth",
+    "1 Samuel", "2 Samuel", "1 Kings", "2 Kings",
+    "1 Chronicles", "2 Chronicles", "Ezra", "Nehemiah", "Esther",
+    "Job", "Psalms", "Proverbs", "Ecclesiastes", "Song of Solomon",
+    "Isaiah", "Jeremiah", "Lamentations", "Ezekiel", "Daniel",
+    "Hosea", "Joel", "Amos", "Obadiah", "Jonah", "Micah",
+    "Nahum", "Habakkuk", "Zephaniah", "Haggai", "Zechariah", "Malachi",
+    "Matthew", "Mark", "Luke", "John", "Acts",
+    "Romans", "1 Corinthians", "2 Corinthians", "Galatians", "Ephesians",
+    "Philippians", "Colossians", "1 Thessalonians", "2 Thessalonians",
+    "1 Timothy", "2 Timothy", "Titus", "Philemon", "Hebrews",
+    "James", "1 Peter", "2 Peter", "1 John", "2 John", "3 John",
+    "Jude", "Revelation"
+  ],
+  "eras": [
+    "Creation",
+    "Patriarchs",
+    "Exodus",
+    "Conquest",
+    "Judges",
+    "Kingdom",
+    "Exile",
+    "Return",
+    "Silence",
+    "Gospel",
+    "Church",
+    "Missions"
+  ]
+}

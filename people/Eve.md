@@ -1,32 +1,34 @@
 ---
-id: "550e8400-e29b-41d4-a716-446655440002"
-name: "Eve"
-type: "person"
-aliases: ["Woman"]
-gender: "female"
-era: "Creation"
+slug: eve
+name: Eve
+type: person
+gender: female
+era: Creation
+tags:
+- matriarch
+- first-woman
 references:
-  - book: "Genesis"
-    start_chapter: 2
-    start_verse: 21
-    end_chapter: 4
-    end_verse: 2
+- Genesis 2:22
+- Genesis 3:20
+- Genesis 4:1-2
+- Genesis 4:25
 relationships:
-  - target_id: "550e8400-e29b-41d4-a716-446655440001"
-    target_name: "Adam"
-    type: "wife_of"
-  - target_id: "550e8400-e29b-41d4-a716-446655440003"
-    target_name: "Cain"
-    type: "mother_of"
-  - target_id: "550e8400-e29b-41d4-a716-446655440004"
-    target_name: "Abel"
-    type: "mother_of"
-  - target_id: "550e8400-e29b-41d4-a716-446655440005"
-    target_name: "Seth"
-    type: "mother_of"
-tags: ["first woman", "creation"]
+- target_slug: adam
+  type: wife_of
+- target_slug: cain
+  type: mother_of
+- target_slug: abel
+  type: mother_of
+- target_slug: seth
+  type: mother_of
+- target_slug: garden-of-eden
+  type: dwelt_in
+- target_slug: creation
+  type: participant_in
+- target_slug: the-fall
+  type: participant_in
 ---
 
 # Eve
 
-The first woman, created by God from Adam's rib. Eve was the mother of Cain, Abel, and Seth. She is known for the account in the Garden of Eden.
+The first woman, formed by God from Adam's rib (Genesis 2:22). Wife of Adam. Mother of Cain, Abel, and Seth.

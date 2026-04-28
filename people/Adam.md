@@ -1,31 +1,34 @@
 ---
-id: "550e8400-e29b-41d4-a716-446655440001"
-name: "Adam"
-type: "person"
-gender: "male"
-era: "Creation"
+slug: adam
+name: Adam
+type: person
+gender: male
+era: Creation
+tags:
+- patriarch
+- first-man
 references:
-  - book: "Genesis"
-    start_chapter: 1
-    start_verse: 26
-    end_chapter: 5
-    end_verse: 5
+- Genesis 1:26-27
+- Genesis 2:7
+- Genesis 3:17-19
+- Genesis 5:3-5
 relationships:
-  - target_id: "550e8400-e29b-41d4-a716-446655440002"
-    target_name: "Eve"
-    type: "husband_of"
-  - target_id: "550e8400-e29b-41d4-a716-446655440003"
-    target_name: "Cain"
-    type: "father_of"
-  - target_id: "550e8400-e29b-41d4-a716-446655440004"
-    target_name: "Abel"
-    type: "father_of"
-  - target_id: "550e8400-e29b-41d4-a716-446655440005"
-    target_name: "Seth"
-    type: "father_of"
-tags: ["first human", "creation"]
+- target_slug: eve
+  type: husband_of
+- target_slug: cain
+  type: father_of
+- target_slug: abel
+  type: father_of
+- target_slug: seth
+  type: father_of
+- target_slug: garden-of-eden
+  type: dwelt_in
+- target_slug: creation
+  type: participant_in
+- target_slug: the-fall
+  type: participant_in
 ---
 
 # Adam
 
-The first man, created by God from the dust of the ground. Adam was placed in the Garden of Eden and given the task of naming the animals. He is the father of Cain, Abel, and Seth.
+The first man, formed by God from the dust of the ground (Genesis 2:7). Husband of Eve. Father of Cain, Abel, and Seth.

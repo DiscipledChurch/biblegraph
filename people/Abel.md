@@ -1,31 +1,27 @@
 ---
-id: "550e8400-e29b-41d4-a716-446655440004"
-name: "Abel"
-type: "person"
-gender: "male"
-era: "Creation"
+slug: abel
+name: Abel
+type: person
+gender: male
+era: Creation
+tags:
+- shepherd
+- martyr
 references:
-  - book: "Genesis"
-    start_chapter: 4
-    start_verse: 1
-    end_chapter: 4
-    end_verse: 8
+- Genesis 4:2
+- Genesis 4:4
+- Genesis 4:8
 relationships:
-  - target_id: "550e8400-e29b-41d4-a716-446655440001"
-    target_name: "Adam"
-    type: "son_of"
-  - target_id: "550e8400-e29b-41d4-a716-446655440002"
-    target_name: "Eve"
-    type: "son_of"
-  - target_id: "550e8400-e29b-41d4-a716-446655440003"
-    target_name: "Cain"
-    type: "brother_of"
-  - target_id: "550e8400-e29b-41d4-a716-446655440005"
-    target_name: "Seth"
-    type: "brother_of"
-tags: ["shepherd", "first martyr"]
+- target_slug: adam
+  type: son_of
+- target_slug: eve
+  type: son_of
+- target_slug: cain
+  type: brother_of
+- target_slug: seth
+  type: brother_of
 ---
 
 # Abel
 
-The second son of Adam and Eve. Abel was a shepherd whose offering was favored by God. He was the first person recorded as having died in the biblical narrative.
+Second son of Adam and Eve. A shepherd whose offering was accepted by God; killed by his brother Cain.
