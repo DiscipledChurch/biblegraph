@@ -1,0 +1,78 @@
+# Main-branch pipeline — runs on push to main.
+#
+# Runs everything ci.yaml does, then deploys data/ to Cosmos via the
+# upsert runner. Cosmos credentials come from the ``biblegraph-cosmos``
+# variable group (Library); secrets are referenced as env vars on the
+# upsert step so they never leak into log output.
+
+trigger:
+  branches:
+    include:
+      - main
+
+pr: none
+
+resources:
+  repositories:
+    - repository: data
+      type: github
+      name: DiscipledChurch/biblegraph
+      endpoint: github-discipledchurch
+      ref: main
+
+variables:
+  - group: biblegraph-cosmos-prd
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - checkout: self
+    path: s/tools
+  - checkout: data
+    path: s/data
+
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: "3.12"
+
+  - script: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
+      pip install ruff mypy
+    displayName: Install dependencies
+    workingDirectory: $(Build.SourcesDirectory)/tools
+
+  - script: ruff check src tests
+    displayName: Lint (ruff)
+    workingDirectory: $(Build.SourcesDirectory)/tools
+
+  - script: mypy src
+    displayName: Type-check (mypy)
+    workingDirectory: $(Build.SourcesDirectory)/tools
+
+  - script: pytest --cov=src --cov-fail-under=80 --junitxml=junit/test-results.xml
+    displayName: Run tests with coverage
+    workingDirectory: $(Build.SourcesDirectory)/tools
+
+  - script: python -m src.validate.runner --data-dir ../data
+    displayName: Validate data/ against schema
+    workingDirectory: $(Build.SourcesDirectory)/tools
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: tools/junit/test-results.xml
+    condition: always()
+
+  - bash: python -m src.upsert.runner --data-dir ../data --apply
+    displayName: Upsert data to Cosmos
+    workingDirectory: $(Build.SourcesDirectory)/tools
+    env:
+      COSMOS_ENDPOINT: $(COSMOS_ENDPOINT)
+      COSMOS_KEY: $(COSMOS_KEY)
+      COSMOS_DATABASE: $(COSMOS_DATABASE)
+      COSMOS_CONTAINER: $(COSMOS_CONTAINER)
+      GREMLIN_ENDPOINT: $(GREMLIN_ENDPOINT)
+      GREMLIN_KEY: $(GREMLIN_KEY)
+      GREMLIN_DATABASE: $(GREMLIN_DATABASE)
+      GREMLIN_CONTAINER: $(GREMLIN_CONTAINER)

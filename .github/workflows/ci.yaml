@@ -1,0 +1,62 @@
+# CI pipeline — runs on every non-main branch push.
+#
+# Checks out both the tools/ self-repo (Azure DevOps) and the data/ repo
+# (GitHub) so validate.runner can resolve markdown against ../data/.
+
+trigger:
+  branches:
+    include:
+      - "*"
+    exclude:
+      - main
+
+pr: none
+
+resources:
+  repositories:
+    - repository: data
+      type: github
+      name: DiscipledChurch/biblegraph
+      endpoint: github-discipledchurch
+      ref: main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - checkout: self
+    path: s/tools
+  - checkout: data
+    path: s/data
+
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: "3.12"
+
+  - script: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
+      pip install ruff mypy
+    displayName: Install dependencies
+    workingDirectory: $(Build.SourcesDirectory)/tools
+
+  - script: ruff check src tests
+    displayName: Lint (ruff)
+    workingDirectory: $(Build.SourcesDirectory)/tools
+
+  - script: mypy src
+    displayName: Type-check (mypy)
+    workingDirectory: $(Build.SourcesDirectory)/tools
+
+  - script: pytest --cov=src --cov-fail-under=80 --junitxml=junit/test-results.xml
+    displayName: Run tests with coverage
+    workingDirectory: $(Build.SourcesDirectory)/tools
+
+  - script: python -m src.validate.runner --data-dir ../data
+    displayName: Validate data/ against schema
+    workingDirectory: $(Build.SourcesDirectory)/tools
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: tools/junit/test-results.xml
+    condition: always()
