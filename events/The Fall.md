@@ -15,6 +15,4 @@ relationships:
   type: has_participant
 ---
 
-# The Fall
-
 Adam and Eve's disobedience in eating the forbidden fruit, leading to expulsion from Eden.

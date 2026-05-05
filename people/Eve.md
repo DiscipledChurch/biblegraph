@@ -29,6 +29,4 @@ relationships:
   type: participant_in
 ---
 
-# Eve
-
 The first woman, formed by God from Adam's rib (Genesis 2:22). Wife of Adam. Mother of Cain, Abel, and Seth.

@@ -23,6 +23,4 @@ relationships:
   type: participant_in
 ---
 
-# Shem
-
 Eldest son of Noah. Ancestor of the Semitic peoples and, ultimately, of Abraham.

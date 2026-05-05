@@ -21,6 +21,4 @@ relationships:
   type: participant_in
 ---
 
-# Japheth
-
 Third son of Noah. Ancestor of the maritime peoples of the Genesis 10 table of nations.

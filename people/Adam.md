@@ -29,6 +29,4 @@ relationships:
   type: participant_in
 ---
 
-# Adam
-
 The first man, formed by God from the dust of the ground (Genesis 2:7). Husband of Eve. Father of Cain, Abel, and Seth.

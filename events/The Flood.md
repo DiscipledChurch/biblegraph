@@ -19,6 +19,4 @@ relationships:
   type: has_participant
 ---
 
-# The Flood
-
 God's judgment upon a corrupt earth; Noah and his household preserved through the ark.

@@ -12,6 +12,4 @@ relationships:
   type: was_home_to
 ---
 
-# Land of Nod
-
 The land east of Eden where Cain dwelt after being exiled for the murder of Abel.

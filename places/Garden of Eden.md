@@ -16,6 +16,4 @@ relationships:
   type: was_home_to
 ---
 
-# Garden of Eden
-
 The garden God planted in the east, where Adam and Eve dwelt before the Fall.

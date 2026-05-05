@@ -15,6 +15,4 @@ relationships:
   type: father_of
 ---
 
-# Lamech
-
 Son of Methuselah and father of Noah. Prophesied comfort through his son.

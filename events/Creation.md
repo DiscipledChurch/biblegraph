@@ -14,6 +14,4 @@ relationships:
   type: has_participant
 ---
 
-# Creation
-
 God's six-day work of creating the heavens and the earth, culminating in humankind, with rest on the seventh day.

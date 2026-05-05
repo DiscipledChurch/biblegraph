@@ -16,6 +16,4 @@ relationships:
   type: father_of
 ---
 
-# Methuselah
-
 Son of Enoch. Lived 969 years — the longest recorded lifespan in Scripture.

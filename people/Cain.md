@@ -23,6 +23,4 @@ relationships:
   type: dwelt_in
 ---
 
-# Cain
-
 Firstborn son of Adam and Eve. Slew his brother Abel and was exiled to the land of Nod.

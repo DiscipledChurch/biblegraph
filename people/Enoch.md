@@ -15,6 +15,4 @@ relationships:
   type: father_of
 ---
 
-# Enoch
-
 Seventh from Adam. Walked with God, and was not, for God took him (Genesis 5:24).

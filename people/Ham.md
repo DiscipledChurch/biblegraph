@@ -21,6 +21,4 @@ relationships:
   type: participant_in
 ---
 
-# Ham
-
 Second son of Noah. Father of Cush, Mizraim, Put, and Canaan.

@@ -14,6 +14,4 @@ relationships:
   type: son_of
 ---
 
-# Enosh
-
 Son of Seth. "At that time people began to call on the name of the Lord" (Genesis 4:26).

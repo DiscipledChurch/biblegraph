@@ -22,6 +22,4 @@ relationships:
   type: brother_of
 ---
 
-# Abel
-
 Second son of Adam and Eve. A shepherd whose offering was accepted by God; killed by his brother Cain.

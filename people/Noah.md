@@ -26,6 +26,4 @@ relationships:
   type: participant_in
 ---
 
-# Noah
-
 Son of Lamech. Found grace in the eyes of the Lord; built the ark and survived the flood with his family.

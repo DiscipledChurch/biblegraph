@@ -22,6 +22,4 @@ relationships:
   type: father_of
 ---
 
-# Seth
-
 Third named son of Adam and Eve, born after Abel's death. Father of Enosh and ancestor of Noah.
