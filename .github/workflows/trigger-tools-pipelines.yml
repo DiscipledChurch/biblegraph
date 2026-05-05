@@ -1,0 +1,57 @@
+# Triggers Azure DevOps tools/ pipelines when data lands on main.
+#
+# Background: Azure DevOps repository resource triggers do NOT work for
+# GitHub-typed repository resources — only Azure Repos Git. So the
+# tools/ pipeline cannot subscribe to data/ pushes via YAML alone. This
+# workflow performs the trigger from the GitHub side instead, calling
+# Azure DevOps' Build REST API.
+#
+# See: https://learn.microsoft.com/en-us/azure/devops/pipelines/process/resources
+#
+# Required GitHub repo secrets (set once via the data repo's settings):
+#   AZURE_DEVOPS_ORG       — e.g. "discipledchurch"
+#   AZURE_DEVOPS_PROJECT   — e.g. "BG - BibleGraph" (paste the human-
+#                             readable name; the workflow URL-encodes it)
+#   AZURE_DEVOPS_PAT       — Personal Access Token with scope
+#                             "Build (Read & execute)"
+#   TOOLS_PIPELINE_ID_MAIN — definition ID of the main.yaml pipeline
+#
+# To get TOOLS_PIPELINE_ID_MAIN: open the pipeline in Azure DevOps,
+# the URL ends with `?definitionId=<N>`. That number.
+
+name: Trigger tools/ pipelines
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  queue-main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Queue tools/main pipeline in Azure DevOps
+        env:
+          ORG: ${{ secrets.AZURE_DEVOPS_ORG }}
+          PROJECT: ${{ secrets.AZURE_DEVOPS_PROJECT }}
+          PAT: ${{ secrets.AZURE_DEVOPS_PAT }}
+          PIPELINE_ID: ${{ secrets.TOOLS_PIPELINE_ID_MAIN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${ORG}" ] || [ -z "${PROJECT}" ] || [ -z "${PAT}" ] || [ -z "${PIPELINE_ID}" ]; then
+            echo "::error::Missing one of AZURE_DEVOPS_ORG / AZURE_DEVOPS_PROJECT / AZURE_DEVOPS_PAT / TOOLS_PIPELINE_ID_MAIN"
+            exit 1
+          fi
+          # URL-encode the project name so secrets stay human-readable
+          # (e.g. "BG - BibleGraph" → "BG%20-%20BibleGraph"). jq is
+          # preinstalled on ubuntu-latest runners.
+          PROJECT_ENC=$(printf '%s' "${PROJECT}" | jq -sRr @uri)
+          # The Pipelines API (api-version 7.1) takes the pipeline id and
+          # accepts an optional templateParameters payload. Empty body =
+          # use defaults (latest tools/ main, default agent pool).
+          curl -fsSL \
+            -X POST \
+            -u ":${PAT}" \
+            -H 'Content-Type: application/json' \
+            "https://dev.azure.com/${ORG}/${PROJECT_ENC}/_apis/pipelines/${PIPELINE_ID}/runs?api-version=7.1" \
+            --data '{}'
+          echo "Queued Azure DevOps pipeline ${PIPELINE_ID} in ${ORG}/${PROJECT}"
