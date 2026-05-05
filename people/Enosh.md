@@ -1,6 +1,6 @@
 ---
 slug: enosh
-name: Enosh
+title: Enosh
 type: person
 gender: male
 era: Creation

@@ -1,6 +1,6 @@
 ---
 slug: cain
-name: Cain
+title: Cain
 type: person
 gender: male
 era: Creation

@@ -1,6 +1,6 @@
 ---
 slug: adam
-name: Adam
+title: Adam
 type: person
 gender: male
 era: Creation

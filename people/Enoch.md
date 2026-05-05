@@ -1,6 +1,6 @@
 ---
 slug: enoch
-name: Enoch
+title: Enoch
 type: person
 gender: male
 era: Creation

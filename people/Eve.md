@@ -1,6 +1,6 @@
 ---
 slug: eve
-name: Eve
+title: Eve
 type: person
 gender: female
 era: Creation

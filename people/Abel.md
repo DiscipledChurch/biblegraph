@@ -1,6 +1,6 @@
 ---
 slug: abel
-name: Abel
+title: Abel
 type: person
 gender: male
 era: Creation

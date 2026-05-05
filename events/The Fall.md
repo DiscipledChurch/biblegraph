@@ -1,6 +1,6 @@
 ---
 slug: the-fall
-name: The Fall
+title: The Fall
 type: event
 era: Creation
 tags:

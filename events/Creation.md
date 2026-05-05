@@ -1,6 +1,6 @@
 ---
 slug: creation
-name: Creation
+title: Creation
 type: event
 era: Creation
 tags:

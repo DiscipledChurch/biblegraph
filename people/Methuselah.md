@@ -1,6 +1,6 @@
 ---
 slug: methuselah
-name: Methuselah
+title: Methuselah
 type: person
 gender: male
 era: Creation

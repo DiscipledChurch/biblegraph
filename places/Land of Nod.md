@@ -1,6 +1,6 @@
 ---
 slug: land-of-nod
-name: Land of Nod
+title: Land of Nod
 type: place
 era: Creation
 tags:

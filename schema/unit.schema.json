@@ -5,14 +5,14 @@
   "title": "Bible Graph Unit",
   "description": "Schema for Bible Graph unit frontmatter (people, places, clans, tribes, groups, events). Identity is the kebab-case slug; UUIDs are derived at upsert time and never stored in markdown.",
   "type": "object",
-  "required": ["slug", "name", "type"],
+  "required": ["slug", "title", "type"],
   "properties": {
     "slug": {
       "type": "string",
       "pattern": "^[a-z][a-z0-9-]*$",
       "description": "Kebab-case unique identifier. Authoritative identity for the node; UUID is derived from this slug at upsert time."
     },
-    "name": {
+    "title": {
       "type": "string",
       "minLength": 1,
       "description": "Display name (need not be unique across the dataset)"

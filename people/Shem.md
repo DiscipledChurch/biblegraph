@@ -1,6 +1,6 @@
 ---
 slug: shem
-name: Shem
+title: Shem
 type: person
 gender: male
 era: Patriarchs

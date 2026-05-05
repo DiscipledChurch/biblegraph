@@ -1,6 +1,6 @@
 ---
 slug: lamech
-name: Lamech
+title: Lamech
 type: person
 gender: male
 era: Creation

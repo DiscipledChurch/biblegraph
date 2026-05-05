@@ -1,6 +1,6 @@
 ---
 slug: noah
-name: Noah
+title: Noah
 type: person
 gender: male
 era: Creation

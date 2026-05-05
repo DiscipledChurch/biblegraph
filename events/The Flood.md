@@ -1,6 +1,6 @@
 ---
 slug: the-flood
-name: The Flood
+title: The Flood
 type: event
 era: Creation
 tags:

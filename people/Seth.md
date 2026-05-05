@@ -1,6 +1,6 @@
 ---
 slug: seth
-name: Seth
+title: Seth
 type: person
 gender: male
 era: Creation

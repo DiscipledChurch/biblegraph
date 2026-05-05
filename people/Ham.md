@@ -1,6 +1,6 @@
 ---
 slug: ham
-name: Ham
+title: Ham
 type: person
 gender: male
 era: Patriarchs

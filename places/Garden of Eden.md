@@ -1,6 +1,6 @@
 ---
 slug: garden-of-eden
-name: Garden of Eden
+title: Garden of Eden
 type: place
 era: Creation
 tags:

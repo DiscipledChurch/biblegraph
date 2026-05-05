@@ -1,6 +1,6 @@
 ---
 slug: japheth
-name: Japheth
+title: Japheth
 type: person
 gender: male
 era: Patriarchs
