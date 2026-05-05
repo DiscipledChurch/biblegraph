@@ -88,3 +88,22 @@ steps:
       GREMLIN_KEY: $(GREMLIN_KEY)
       GREMLIN_DATABASE: $(GREMLIN_DATABASE)
       GREMLIN_CONTAINER: $(GREMLIN_CONTAINER)
+
+  - bash: python -m src.verify.runner --data-dir ../data
+    displayName: Verify Cosmos integrity
+    workingDirectory: $(Build.SourcesDirectory)/tools
+    env:
+      COSMOS_ENDPOINT: $(COSMOS_ENDPOINT)
+      COSMOS_KEY: $(COSMOS_KEY)
+      COSMOS_DATABASE: $(COSMOS_DATABASE)
+      COSMOS_CONTAINER: $(COSMOS_CONTAINER)
+      GREMLIN_ENDPOINT: $(GREMLIN_ENDPOINT)
+      GREMLIN_KEY: $(GREMLIN_KEY)
+      GREMLIN_DATABASE: $(GREMLIN_DATABASE)
+      GREMLIN_CONTAINER: $(GREMLIN_CONTAINER)
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: tools/junit/verify-results.xml
+      testRunTitle: Verify
+    condition: always()
