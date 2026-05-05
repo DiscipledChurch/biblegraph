@@ -75,3 +75,16 @@ steps:
       GREMLIN_KEY: $(GREMLIN_KEY)
       GREMLIN_DATABASE: $(GREMLIN_DATABASE)
       GREMLIN_CONTAINER: $(GREMLIN_CONTAINER)
+
+  - bash: python -m src.reconcile.runner --data-dir ../data --apply
+    displayName: Reconcile orphans in Cosmos
+    workingDirectory: $(Build.SourcesDirectory)/tools
+    env:
+      COSMOS_ENDPOINT: $(COSMOS_ENDPOINT)
+      COSMOS_KEY: $(COSMOS_KEY)
+      COSMOS_DATABASE: $(COSMOS_DATABASE)
+      COSMOS_CONTAINER: $(COSMOS_CONTAINER)
+      GREMLIN_ENDPOINT: $(GREMLIN_ENDPOINT)
+      GREMLIN_KEY: $(GREMLIN_KEY)
+      GREMLIN_DATABASE: $(GREMLIN_DATABASE)
+      GREMLIN_CONTAINER: $(GREMLIN_CONTAINER)
