@@ -14,10 +14,9 @@ pr: none
 
 resources:
   repositories:
-    - repository: data
-      type: github
-      name: DiscipledChurch/biblegraph
-      endpoint: github-discipledchurch
+    - repository: tools
+      type: git
+      name: tools
       ref: main
 
 variables:
@@ -28,9 +27,9 @@ pool:
 
 steps:
   - checkout: self
-    path: s/tools
-  - checkout: data
     path: s/data
+  - checkout: tools
+    path: s/tools
 
   - task: UsePythonVersion@0
     inputs:

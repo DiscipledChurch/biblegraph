@@ -1,23 +1,19 @@
-# CI pipeline — runs on every non-main branch push.
+# PR pipeline — runs on every pull request targeting main.
 #
-# Checks out both the tools/ self-repo (Azure DevOps) and the data/ repo
-# (GitHub) so validate.runner can resolve markdown against ../data/.
+# Same as ci.yaml plus published Cobertura coverage results.
 
-trigger:
+trigger: none
+
+pr:
   branches:
     include:
-      - "*"
-    exclude:
       - main
-
-pr: none
 
 resources:
   repositories:
-    - repository: data
-      type: github
-      name: DiscipledChurch/biblegraph
-      endpoint: github-discipledchurch
+    - repository: tools
+      type: git
+      name: tools
       ref: main
 
 pool:
@@ -25,9 +21,9 @@ pool:
 
 steps:
   - checkout: self
-    path: s/tools
-  - checkout: data
     path: s/data
+  - checkout: tools
+    path: s/tools
 
   - task: UsePythonVersion@0
     inputs:
@@ -48,7 +44,10 @@ steps:
     displayName: Type-check (mypy)
     workingDirectory: $(Build.SourcesDirectory)/tools
 
-  - script: pytest --cov=src --cov-fail-under=80 --junitxml=junit/test-results.xml
+  - script: |
+      pytest --cov=src --cov-fail-under=80 \
+        --cov-report=xml --cov-report=html \
+        --junitxml=junit/test-results.xml
     displayName: Run tests with coverage
     workingDirectory: $(Build.SourcesDirectory)/tools
 
@@ -59,4 +58,10 @@ steps:
   - task: PublishTestResults@2
     inputs:
       testResultsFiles: tools/junit/test-results.xml
+    condition: always()
+
+  - task: PublishCodeCoverageResults@2
+    inputs:
+      summaryFileLocation: tools/coverage.xml
+      pathToSources: tools/src
     condition: always()
