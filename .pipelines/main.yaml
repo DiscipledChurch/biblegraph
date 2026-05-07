@@ -141,7 +141,7 @@ steps:
       COSMOS_KEY: $(COSMOS_KEY)
       COSMOS_DATABASE: $(COSMOS_DATABASE)
       COSMOS_CONTAINER: $(COSMOS_CONTAINER)
-      COSMOS_INFERRED_EDGES_CONTAINER: $(COSMOS_INFERRED_EDGES_CONTAINER)
+      # COSMOS_INFERRED_EDGES_CONTAINER omitted intentionally — script defaults to 'inferred_edges'. Add to variable group + restore here to override.
       AZURE_OPENAI_EMBEDDING_DIMENSIONS: $(AZURE_OPENAI_EMBEDDING_DIMENSIONS)
 
   - bash: pnpm run reindex
@@ -153,7 +153,7 @@ steps:
       COSMOS_KEY: $(COSMOS_KEY)
       COSMOS_DATABASE: $(COSMOS_DATABASE)
       COSMOS_CONTAINER: $(COSMOS_CONTAINER)
-      COSMOS_INFERRED_EDGES_CONTAINER: $(COSMOS_INFERRED_EDGES_CONTAINER)
+      # COSMOS_INFERRED_EDGES_CONTAINER omitted intentionally — script defaults to 'inferred_edges'. Add to variable group + restore here to override.
       GREMLIN_ENDPOINT: $(GREMLIN_ENDPOINT)
       GREMLIN_KEY: $(GREMLIN_KEY)
       GREMLIN_DATABASE: $(GREMLIN_DATABASE)
