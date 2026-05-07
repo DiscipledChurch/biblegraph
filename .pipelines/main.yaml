@@ -133,6 +133,17 @@ steps:
     displayName: pnpm install (tools/reindex)
     workingDirectory: $(Build.SourcesDirectory)/tools/reindex
 
+  - bash: pnpm run provision:cosmos
+    displayName: Provision Cosmos vector containers (idempotent)
+    workingDirectory: $(Build.SourcesDirectory)/tools/reindex
+    env:
+      COSMOS_ENDPOINT: $(COSMOS_ENDPOINT)
+      COSMOS_KEY: $(COSMOS_KEY)
+      COSMOS_DATABASE: $(COSMOS_DATABASE)
+      COSMOS_CONTAINER: $(COSMOS_CONTAINER)
+      COSMOS_INFERRED_EDGES_CONTAINER: $(COSMOS_INFERRED_EDGES_CONTAINER)
+      AZURE_OPENAI_EMBEDDING_DIMENSIONS: $(AZURE_OPENAI_EMBEDDING_DIMENSIONS)
+
   - bash: pnpm run reindex
     displayName: Reindex embeddings and inferred edges
     workingDirectory: $(Build.SourcesDirectory)/tools/reindex
