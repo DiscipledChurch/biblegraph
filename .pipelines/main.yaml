@@ -18,6 +18,10 @@ resources:
       type: git
       name: tools
       ref: main
+    - repository: app
+      type: git
+      name: web
+      ref: main
 
 variables:
   - group: biblegraph-cosmos-prd
@@ -30,6 +34,8 @@ steps:
     path: s/data
   - checkout: tools
     path: s/tools
+  - checkout: app
+    path: s/app
 
   - task: UsePythonVersion@0
     inputs:
@@ -107,3 +113,43 @@ steps:
       testResultsFiles: tools/junit/verify-results.xml
       testRunTitle: Verify
     condition: always()
+
+  # Reindex stage — runs after upsert/reconcile/verify so embeddings and
+  # inferred edges in Cosmos always reflect the just-deployed data. The
+  # underlying GraphIndexer is idempotent: nodes whose contentHash has not
+  # changed since the previous run are skipped (cached), so re-running on
+  # unchanged data is a near no-op. Runs only if every preceding step on
+  # this job succeeded (default `condition: succeeded()`), so a failed
+  # upsert never triggers a partial reindex.
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "22.x"
+    displayName: Use Node 22
+
+  - bash: corepack enable && corepack prepare pnpm@latest --activate
+    displayName: Enable pnpm via corepack
+
+  - bash: pnpm install --frozen-lockfile
+    displayName: pnpm install (app)
+    workingDirectory: $(Build.SourcesDirectory)/app
+
+  - bash: pnpm run reindex
+    displayName: Reindex embeddings and inferred edges
+    workingDirectory: $(Build.SourcesDirectory)/app
+    env:
+      BIBLEGRAPH_DATA_ADAPTER: cosmos
+      LLM_PROVIDER: $(LLM_PROVIDER)
+      COSMOS_ENDPOINT: $(COSMOS_ENDPOINT)
+      COSMOS_KEY: $(COSMOS_KEY)
+      COSMOS_DATABASE: $(COSMOS_DATABASE)
+      COSMOS_CONTAINER: $(COSMOS_CONTAINER)
+      COSMOS_INFERRED_EDGES_CONTAINER: $(COSMOS_INFERRED_EDGES_CONTAINER)
+      GREMLIN_ENDPOINT: $(GREMLIN_ENDPOINT)
+      GREMLIN_KEY: $(GREMLIN_KEY)
+      GREMLIN_DATABASE: $(GREMLIN_DATABASE)
+      GREMLIN_CONTAINER: $(GREMLIN_CONTAINER)
+      AZURE_OPENAI_API_KEY: $(AZURE_OPENAI_API_KEY)
+      AZURE_OPENAI_ENDPOINT: $(AZURE_OPENAI_ENDPOINT)
+      AZURE_OPENAI_DEPLOYMENT: $(AZURE_OPENAI_DEPLOYMENT)
+      AZURE_OPENAI_EMBEDDING_DEPLOYMENT: $(AZURE_OPENAI_EMBEDDING_DEPLOYMENT)
+      AZURE_OPENAI_EMBEDDING_DIMENSIONS: $(AZURE_OPENAI_EMBEDDING_DIMENSIONS)
