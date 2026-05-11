@@ -24,7 +24,7 @@ relationships:
 - target_slug: garden-of-eden
   type: dwelt_in
 - target_slug: creation
-  type: participant_in
+  type: formed_in
 - target_slug: the-fall
   type: participant_in
 ---

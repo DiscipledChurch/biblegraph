@@ -11,9 +11,9 @@ references:
 - Genesis 3:23-24
 relationships:
 - target_slug: adam
-  type: was_home_to
+  type: home_to
 - target_slug: eve
-  type: was_home_to
+  type: home_to
 ---
 
 The garden God planted in the east, where Adam and Eve dwelt before the Fall.
