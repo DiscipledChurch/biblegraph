@@ -81,8 +81,10 @@
               "has_member",
               "participant_in",
               "has_participant",
+              "culminated_in",
+              "formed_in",
               "dwelt_in",
-              "was_home_to"
+              "home_to"
             ],
             "description": "Snake_case relationship type. Gender-specific only; no married_to, parent_of, child_of, sibling_of, or spouse_of."
           }
